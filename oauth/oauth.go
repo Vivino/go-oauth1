@@ -67,7 +67,7 @@
 //     ctx := context.WithValue(context.Background(), oauth.HTTPClient, hc)
 //     c := oauth.Client{ /* Any settings */ }
 //     resp, err := c.GetContext(ctx, &oauth.Credentials{}, rawurl, nil)
-package oauth // import "github.com/gomodule/oauth1/oauth"
+package oauth // import "github.com/corthmann/oauth1/oauth"
 
 import (
 	"bytes"
@@ -480,6 +480,12 @@ func (c *Client) AuthorizationHeader(credentials *Credentials, method string, u 
 	// this method does not return an error.
 	v, _ := c.authorizationHeader(&request{credentials: credentials, method: method, u: u, form: params})
 	return v
+}
+
+// AuthorizationHeader returns the HTTP authorization header value for given
+// method, URL and parameters or an error if signing of the request fails.
+func (c *Client) GetAuthorizationHeader(credentials *Credentials, method string, u *url.URL, params url.Values) (string,error) {
+	return c.authorizationHeader(&request{credentials: credentials, method: method, u: u, form: params})
 }
 
 // SetAuthorizationHeader adds an OAuth signature to a request header.
