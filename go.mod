@@ -1,1 +1,1 @@
-module github.com/gomodule/oauth1
+module github.com/corthmann/oauth1
